@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Question 1</h2>
+
+<script>
+    function lowerCaseWords(array){
+        return new Promise(function(resolve, reject) {
+            var sorted = [];
+            words = array.filter(e => typeof e === 'string' && e !== '')
+            for (var i = 0, L=words.length ; i < L; i++) {
+                sorted[i]=words[i].toLowerCase();
+            }
+
+            if (sorted.length != 0) {
+                console.log(sorted)
+                resolve('It works')
+            }else {
+                reject(new Error('No words'))
+            }
+        })
+    };
+
+    const mixedArray = ['PIZZA', 10, true, 25, false, 'Wings'];
+    console.log(lowerCaseWords(mixedArray));
+</script>
+
+</body>
+</html>

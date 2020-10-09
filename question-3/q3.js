@@ -21,10 +21,10 @@ let logger = (req, res, next) => {
   }
 
 
-var deletelogs = function(path) {
-    if( fs.existsSync(path) ) {
-      fs.readdirSync(path).forEach(function(file,index){
-        var curPath = path + "/" + file;
+var deletelogs = function() {
+    if( fs.existsSync("Logs/") ) {
+      fs.readdirSync("./Logs").forEach(function(file,index){
+        var curPath = "Logs/" + file;
         if(fs.lstatSync(curPath).isDirectory()) { 
           deleteFolderRecursive(curPath);
         } else { 
@@ -35,7 +35,7 @@ var deletelogs = function(path) {
     }
   };
 
-deletelogs("/Logs");
+deletelogs();
 app.use(logger);
 
 app.listen(process.env.port || 8081);

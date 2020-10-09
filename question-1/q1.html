@@ -14,16 +14,20 @@
             }
 
             if (sorted.length != 0) {
-                console.log(sorted)
                 resolve('It works')
             }else {
-                reject(new Error('No words'))
+                reject('No words')
             }
         })
     };
 
     const mixedArray = ['PIZZA', 10, true, 25, false, 'Wings'];
-    console.log(lowerCaseWords(mixedArray));
+    lowerCaseWords(mixedArray).then((result)=>{
+        console.log(result)
+    },
+    (error)=>{
+        console.log(error)
+    })
 </script>
 
 </body>

@@ -1,8 +1,11 @@
-function resolvedPromise() {
+function resolvedPromise(done) {
     return new Promise(function(resolve, reject) {
         setTimeout(() => {
-            let success = {'message' : 'delayed success!'}
-            console.log(success);
+            if(done){
+                resolve({'message' : 'delayed success!'})
+            }else{
+                reject('Rejected')
+            }
         }, 500)
     })
 }
@@ -10,17 +13,31 @@ function resolvedPromise() {
 function rejectedPromise() {
     return new Promise(function(resolve, reject) {
         setTimeout(() => {
+            let Msg = ""
             try {
-                throw new Error('error: delayed exception!');
-            }catch (e) {
-                console.error(e);
+                throw new Error({ 'error': 'delayed excelption!' })
+            } catch (e) {
+                Msg = e.message
+            }
+
+            if(false){
+                resolve('there was no error')
+            }
+            else{
+                reject(Msg)
             }
         }, 500)
     })
 }
 
-let test = resolvedPromise();
-test.then(success => console.log(success))
+rejectedPromise(true).then((result) =>{
+    console.log(result)
+}, error =>{
+    console.log(error)
+})
 
-let test2 = rejectPromise();
-test2.then(success => console.log(success))
+resolvedPromise(true).then((result) => {
+    console.log(result)
+}, error => {
+    console.log(error)
+})
